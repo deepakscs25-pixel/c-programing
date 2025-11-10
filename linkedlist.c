@@ -1,7 +1,8 @@
 #include<stdio.h>
 #include <stdlib.h>
 
-struct node{
+struct node
+{
     int data;
     struct node * next;
 };
@@ -12,8 +13,9 @@ void createList(int n){
     struct node *newnode, *temp;
     int data,i;
 
-    if(n<0){
+    if(n<=0){
         printf("Number of nodes should be greater than 0.\n");
+        return;
     }
 
     for(i=1; i<=n; i++)
@@ -21,9 +23,10 @@ void createList(int n){
         newnode=(struct node*)malloc(sizeof(struct node));
         if (newnode == NULL){
             printf("Memory allocation failed.\n");
+            return;
         }
         
-        printf("Enter the data for node %d", i );
+        printf("Enter the data for node %d: ", i );
         scanf("%d" ,&data);
         newnode->data=data;
         newnode->next=NULL;
@@ -58,25 +61,31 @@ void insertAtend(int data){
     }
     else{
         struct node *temp = head;
-        while(temp->next!=NULL){
+        while(temp->next!=NULL)
             temp=temp->next;
-        }
         temp->next=newnode;
     }
-    printf("Node inserted at end");
+    printf("Node inserted at end.\n");
 }
 
 void insertAtPosition(int data, int pos){
     int i;
-    struct node *newnode, *temp =head;
+    struct node *newnode, *temp = head;
 
-    if(pos<1){
+    if(pos < 1){
         printf("Invalid position.\n");
+        return;
     }
     if(pos==1){
         insertAtfront(data);
+        return;
     }
-    for(i=1;i<pos-1 && temp != NULL;i++){
+    
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data=data;
+    
+    for(i=1;i<pos-1 && temp != NULL;i++)
+    {
         temp = temp->next;
     }
 
@@ -85,25 +94,26 @@ void insertAtPosition(int data, int pos){
         free(newnode);
     }
 
-    else{
+    else
+    {
         newnode->next = temp->next;
         temp->next=newnode;  
-        printf("Node inserted at position %d",pos);
+        printf("Node inserted at position %d: ",pos);
     }
 
 }
 
 void display(){
-    struct node *temp= head;
+    struct node *temp = head;
     if(head=NULL){
         printf("List is empty");
         return;
     }
     printf("Linked list: ");
     while(temp!=NULL){
-        printf("%d ->",temp->data);
+        printf("%d ",temp->data);
+        temp=temp->next;
     }
-    printf("NULL\n");
 }
 
 
@@ -123,40 +133,41 @@ int main(){
 
         switch(choice){
             case 1:
-            printf("Enter the number of Nodes:");
-            scanf("%d",&n);
-            createList(n);
-            break;
+                printf("Enter the number of Nodes:");
+                scanf("%d",&n);
+                createList(n);
+                break;
 
             case 2:
-            printf("Enter the data to insert: ");
-            scanf("%d",&data);
-            insertAtfront(data);
-            break;
+                printf("Enter the data to insert: ");
+                scanf("%d",&data);
+                insertAtfront(data);
+                break;
 
             case 3:
-            printf("Enter the data and position:");
-            scanf("%d,%d",&data,&pos);
-            insertAtPosition(data,pos);
-            break;
+                printf("Enter the data and position:");
+                scanf("%d %d",&data,&pos);
+                insertAtPosition(data,pos);
+                break;
 
             case 4:
-            printf("Enter the data to insert: ");
-            scanf("%d",&data);
-            insertAtend(data);
-            break;
+                printf("Enter the data to insert: ");
+                scanf("%d",&data);
+                insertAtend(data);
+                break;
 
             case 5:
-            display();
-            break;
+                display();
+                break;
             
             case 6:
-            return;
-            break;
+                return 0;
+                break;
 
             default:
-            printf("Invalid choice!!");
+                printf("Invalid choice!!");
 
         }
     }
+    return 0;
 }
