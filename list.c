@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 
 struct node{
     int data;
@@ -81,10 +81,15 @@ void deleteValue(int value){
         head=head->next;
         printf("Deleted element is %d",temp->data);
         free(temp);
+        return;
     }
     while(temp!=NULL && temp->data!= value){
         prev=temp;
         temp=temp->next;
+    }
+    if(temp==NULL){
+        printf("Not found");
+        return;
     }
     prev->next=temp->next;
     printf("Deleted value is %d",temp->data);
@@ -132,7 +137,7 @@ int main(){
             break;
 
             case 3:
-            printf("Enter the Value to delete");
+            printf("Enter the Value to delete: ");
             scanf("%d",&value);
             deleteValue(value);
             break;
