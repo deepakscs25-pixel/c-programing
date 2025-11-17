@@ -102,6 +102,7 @@ void display(){
     printf("Linked list: ");
     while(temp!=NULL){
         printf("%d ->",temp->data);
+        temp=temp->next;
     }
     printf("NULL\n");
 }
@@ -151,7 +152,7 @@ int main(){
             break;
             
             case 6:
-            return;
+            return 0;
             break;
 
             default:
@@ -159,4 +160,6 @@ int main(){
 
         }
     }
+    return 0;
+
 }
